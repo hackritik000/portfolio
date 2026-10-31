@@ -1,0 +1,71 @@
+---
+import { FileText, Download, Eye, ExternalLink, X, CheckCircle2 } from 'lucide-astro';
+import { portfolioData } from '../data/portfolioData';
+---
+
+<!-- Resume Download & Preview Callout Section -->
+<section class="py-12 relative">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="glass-panel rounded-3xl p-8 sm:p-10 border border-cyan-500/20 bg-gradient-to-br from-cyan-950/30 via-slate-900/60 to-slate-950 relative overflow-hidden shadow-2xl">
+      
+      <!-- Ambient light effect -->
+      <div class="absolute -right-20 -bottom-20 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+        
+        <div class="lg:col-span-8 space-y-4">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 text-xs font-mono">
+            <FileText class="w-3.5 h-3.5" />
+            <span>Official Curriculum Vitae</span>
+          </div>
+
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+            Interested in the full technical breakdown?
+          </h2>
+
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl">
+            Download my comprehensive resume covering 3+ years of professional engineering, architecture rewrites, cross-platform app deployments, and team leadership.
+          </p>
+
+          <div class="flex flex-wrap items-center gap-4 pt-2 text-xs text-slate-400 font-mono">
+            <span class="flex items-center gap-1.5">
+              <CheckCircle2 class="w-4 h-4 text-emerald-400" />
+              Verified Work Experience
+            </span>
+            <span class="flex items-center gap-1.5">
+              <CheckCircle2 class="w-4 h-4 text-emerald-400" />
+              Direct Contacts &amp; References
+            </span>
+            <span class="flex items-center gap-1.5">
+              <CheckCircle2 class="w-4 h-4 text-emerald-400" />
+              Clean 1-Page PDF Format
+            </span>
+          </div>
+        </div>
+
+        <div class="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-3">
+          <a
+            href={portfolioData.personal.resumeUrl}
+            download="Ritik_Parihar_Resume.pdf"
+            class="flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-sm transition-all shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:-translate-y-0.5 text-center"
+          >
+            <Download class="w-4 h-4" />
+            <span>Download PDF Resume</span>
+          </a>
+
+          <a
+            href={portfolioData.personal.resumeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-slate-900 border border-white/10 hover:border-cyan-500/40 text-slate-200 hover:text-white font-medium text-sm transition-all hover:bg-slate-800 text-center"
+          >
+            <Eye class="w-4 h-4 text-cyan-400" />
+            <span>Open in Browser Tab</span>
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>

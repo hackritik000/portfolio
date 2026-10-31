@@ -1,0 +1,324 @@
+---
+import { Terminal, Play, CornerDownLeft, Maximize2, RotateCcw } from 'lucide-astro';
+import { portfolioData } from '../data/portfolioData';
+
+const quickCommands = ['whoami', 'skills', 'projects', 'experience', 'resume', 'contact', 'help', 'clear'];
+---
+
+<section id="terminal" class="py-20 relative">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Section Header -->
+    <div class="space-y-3 mb-10 text-center max-w-2xl mx-auto">
+      <div class="inline-flex items-center gap-2 font-mono text-xs font-semibold text-cyan-400 uppercase tracking-widest">
+        <span>// 06. Interactive CLI &amp; Neovim</span>
+      </div>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+        Test the environment in the <span class="gradient-text">terminal</span>.
+      </h2>
+      <p class="text-slate-400 text-sm">
+        As a dedicated Neovim &amp; tmux user, I live in the command line. Type commands below or click the quick action chips.
+      </p>
+
+      <!-- Quick Command Buttons -->
+      <div class="flex flex-wrap items-center justify-center gap-1.5 pt-2">
+        <span class="text-xs font-mono text-slate-500 mr-1">Try:</span>
+        {quickCommands.map((cmd) => (
+          <button
+            type="button"
+            data-run-cmd={cmd}
+            class="terminal-quick-btn px-2.5 py-1 rounded-md bg-slate-900 border border-white/10 hover:border-cyan-500/50 hover:bg-cyan-500/10 text-cyan-400 font-mono text-xs transition-colors cursor-pointer"
+          >
+            {cmd}
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <!-- Terminal Window Container -->
+    <div class="max-w-4xl mx-auto rounded-2xl glass-panel border border-white/10 shadow-2xl overflow-hidden bg-slate-950/95 font-mono text-xs sm:text-sm">
+      
+      <!-- Top Title Bar -->
+      <div class="flex items-center justify-between px-4 py-3 bg-slate-900 border-b border-white/10">
+        <div class="flex items-center gap-2">
+          <span class="w-3 h-3 rounded-full bg-rose-500 inline-block"></span>
+          <span class="w-3 h-3 rounded-full bg-amber-500 inline-block"></span>
+          <span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span>
+          <span class="ml-2 text-xs text-slate-400 flex items-center gap-1.5 font-semibold">
+            <Terminal class="w-3.5 h-3.5 text-cyan-400" />
+            ritik@workstation: ~/portfolio (tmux: session-0)
+          </span>
+        </div>
+
+        <div class="flex items-center gap-3 text-[11px] text-slate-400">
+          <span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-semibold">
+            NORMAL
+          </span>
+          <button id="term-clear-btn" type="button" title="Clear Terminal" class="hover:text-white transition-colors cursor-pointer">
+            <RotateCcw class="w-3.5 h-3.5" />
+          </button>
+        </div>
+      </div>
+
+      <!-- Terminal Output Screen -->
+      <div id="terminal-screen" class="p-5 min-h-[300px] max-h-[460px] overflow-y-auto space-y-3 leading-relaxed text-slate-300">
+        <div class="text-slate-500 text-xs">
+          Welcome to Ritik Parihar's interactive portfolio terminal shell (Astro + Bun).<br />
+          Type <span class="text-cyan-400 font-semibold">'help'</span> to see all available commands, or click any chip above.
+        </div>
+        
+        <div class="p-3 rounded-lg bg-cyan-950/20 border border-cyan-500/20 text-xs text-cyan-300">
+          ➜ Tip: Type <span class="text-white font-bold">'resume'</span> to download Ritik's resume PDF directly, or <span class="text-white font-bold">'contact'</span> to get in touch.
+        </div>
+      </div>
+
+      <!-- Terminal Input Line -->
+      <form id="terminal-form" class="flex items-center gap-2 px-4 py-3 bg-slate-900/90 border-t border-white/10">
+        <span class="text-emerald-400 font-bold">➜</span>
+        <span class="text-cyan-400 font-semibold text-xs">ritik.dev</span>
+        <span class="text-slate-500 text-xs">$</span>
+        <input
+          id="terminal-input"
+          type="text"
+          autocomplete="off"
+          autocorrect="off"
+          autocapitalize="off"
+          spellcheck="false"
+          placeholder="Type a command (try 'whoami', 'skills', 'projects', 'resume')..."
+          class="flex-1 bg-transparent text-white font-mono text-xs sm:text-sm focus:outline-none placeholder-slate-600"
+        />
+        <button
+          type="submit"
+          aria-label="Submit command"
+          class="p-1.5 rounded-lg bg-cyan-500/10 text-cyan-400 hover:bg-cyan-500/20 transition-colors"
+        >
+          <CornerDownLeft class="w-4 h-4" />
+        </button>
+      </form>
+
+      <!-- Bottom Vim Statusline -->
+      <div class="flex items-center justify-between px-4 py-1.5 bg-slate-950 border-t border-white/5 text-[10px] text-slate-500">
+        <div class="flex items-center gap-2">
+          <span class="text-cyan-400 font-bold">NVIM v0.10</span>
+          <span>•</span>
+          <span>bash 5.2 / bun 1.4.2</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <span>utf-8</span>
+          <span class="text-emerald-400">● git:(main)</span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<script>
+  import { portfolioData } from '../data/portfolioData';
+
+  const screen = document.getElementById('terminal-screen');
+  const input = document.getElementById('terminal-input') as HTMLInputElement | null;
+  const form = document.getElementById('terminal-form');
+  const clearBtn = document.getElementById('term-clear-btn');
+  const quickBtns = document.querySelectorAll('.terminal-quick-btn');
+
+  function appendLine(html: string) {
+    if (!screen) return;
+    const div = document.createElement('div');
+    div.innerHTML = html;
+    screen.appendChild(div);
+    screen.scrollTop = screen.scrollHeight;
+  }
+
+  function handleCommand(cmdRaw: string) {
+    const cmd = cmdRaw.trim().toLowerCase();
+    if (!cmd) return;
+
+    // Echo command
+    appendLine(`
+      <div class="flex items-center gap-2 pt-2 text-slate-400 text-xs">
+        <span class="text-emerald-400 font-bold">➜</span>
+        <span class="text-cyan-400 font-semibold">ritik.dev</span>
+        <span class="text-white font-semibold">$ ${cmdRaw}</span>
+      </div>
+    `);
+
+    switch (cmd) {
+      case 'help':
+        appendLine(`
+          <div class="space-y-1 text-slate-300 pl-4 border-l-2 border-cyan-500/40 my-2 text-xs">
+            <div class="font-bold text-cyan-400 pb-1">Available Commands:</div>
+            <div><span class="text-emerald-400 font-bold w-28 inline-block">whoami</span> - Display developer summary and career focus</div>
+            <div><span class="text-emerald-400 font-bold w-28 inline-block">skills</span> - List languages, frameworks, ORMs, and tools</div>
+            <div><span class="text-emerald-400 font-bold w-28 inline-block">projects</span> - Display top projects (JustSearch, Dukandar, Mandi ERP, etc.)</div>
+            <div><span class="text-emerald-400 font-bold w-28 inline-block">experience</span> - Show company history and leadership roles</div>
+            <div><span class="text-emerald-400 font-bold w-28 inline-block">education</span> - Display academic degrees &amp; college</div>
+            <div><span class="text-emerald-400 font-bold w-28 inline-block">resume</span> - Download or view Ritik's PDF resume</div>
+            <div><span class="text-emerald-400 font-bold w-28 inline-block">contact</span> - Show email, phone, and social handles</div>
+            <div><span class="text-emerald-400 font-bold w-28 inline-block">neovim</span> - View Neovim &amp; tmux setup philosophy</div>
+            <div><span class="text-emerald-400 font-bold w-28 inline-block">clear</span> - Clear the terminal output buffer</div>
+          </div>
+        `);
+        break;
+
+      case 'whoami':
+        appendLine(`
+          <div class="p-3 rounded-lg bg-slate-900 border border-white/5 space-y-1.5 my-2 text-xs">
+            <div class="text-white font-bold text-sm">Ritik Parihar (${portfolioData.personal.handle})</div>
+            <div class="text-cyan-400 font-medium">${portfolioData.personal.title}</div>
+            <div class="text-slate-300">Location: ${portfolioData.personal.location}</div>
+            <div class="text-slate-300">Experience: ${portfolioData.personal.experienceYears} with TypeScript, React Native, Next.js, Expo, Astro, Docker, tRPC</div>
+            <div class="text-emerald-400 font-semibold pt-1">Status: ${portfolioData.personal.status}</div>
+          </div>
+        `);
+        break;
+
+      case 'skills':
+        const categoriesHtml = portfolioData.skillsCategories.map(c => `
+          <div class="pt-1">
+            <span class="text-cyan-400 font-semibold">${c.title}:</span>
+            <span class="text-slate-300">${c.skills.map(s => s.name).join(', ')}</span>
+          </div>
+        `).join('');
+        appendLine(`
+          <div class="space-y-1.5 pl-4 border-l-2 border-emerald-500/40 my-2 text-xs">
+            <div class="text-emerald-400 font-bold text-xs uppercase tracking-wider">Technical Skills Taxonomy:</div>
+            ${categoriesHtml}
+          </div>
+        `);
+        break;
+
+      case 'projects':
+        const projectsHtml = portfolioData.projects.map(p => `
+          <div class="border-b border-white/5 pb-2">
+            <div class="text-cyan-300 font-bold text-xs">${p.title} <span class="text-slate-500 font-normal">(${p.period})</span></div>
+            <div class="text-slate-400 text-[11px]">${p.subtitle}</div>
+            <div class="text-slate-300 text-xs mt-0.5">${p.description}</div>
+            ${p.links?.appstore ? `<div class="text-sky-300 text-[11px] mt-1 font-mono">🍎 App Store: <a href="${p.links.appstore}" target="_blank" class="underline">${p.links.appstore}</a></div>` : ''}
+            ${p.links?.playstore ? `<div class="text-emerald-400 text-[11px] mt-0.5 font-mono">📱 Google Play: <a href="${p.links.playstore}" target="_blank" class="underline">${p.links.playstore}</a></div>` : ''}
+            ${p.links?.website ? `<div class="text-cyan-400 text-[11px] mt-0.5 font-mono">🌐 Website: <a href="${p.links.website}" target="_blank" class="underline">${p.links.website}</a></div>` : ''}
+            ${p.links?.live && !p.links?.website ? `<div class="text-cyan-400 text-[11px] mt-0.5 font-mono">🚀 Live Demo: <a href="${p.links.live}" target="_blank" class="underline">${p.links.live}</a></div>` : ''}
+            ${p.links?.github ? `<div class="text-slate-400 text-[11px] mt-0.5 font-mono">💻 GitHub: <a href="${p.links.github}" target="_blank" class="underline">${p.links.github}</a></div>` : ''}
+            <div class="text-slate-500 text-[10px] font-mono mt-1">Tags: ${p.tags.slice(0, 5).join(' • ')}</div>
+          </div>
+        `).join('');
+        appendLine(`
+          <div class="space-y-3 pl-4 border-l-2 border-indigo-500/40 my-2 text-xs">
+            <div class="text-indigo-400 font-bold">Featured Projects:</div>
+            ${projectsHtml}
+          </div>
+        `);
+        break;
+
+      case 'experience':
+        const expHtml = portfolioData.experience.map(e => `
+          <div class="border-b border-white/5 pb-2">
+            <div class="text-white font-bold">${e.role} @ <span class="text-cyan-400">${e.company}</span></div>
+            <div class="text-slate-500 text-[11px] font-mono">${e.period} | ${e.location}</div>
+            <div class="text-slate-300 text-xs mt-1">${e.summary}</div>
+          </div>
+        `).join('');
+        appendLine(`
+          <div class="space-y-3 pl-4 border-l-2 border-amber-500/40 my-2 text-xs">
+            <div class="text-amber-400 font-bold">Career Timeline:</div>
+            ${expHtml}
+          </div>
+        `);
+        break;
+
+      case 'education':
+        const eduHtml = portfolioData.education.map(ed => `
+          <div>
+            <div class="text-white font-bold">${ed.degree}</div>
+            <div class="text-cyan-400 text-xs">${ed.institution} (${ed.period})</div>
+          </div>
+        `).join('');
+        appendLine(`
+          <div class="space-y-2 pl-4 border-l-2 border-cyan-500/40 my-2 text-xs">
+            <div class="text-cyan-400 font-bold">Education:</div>
+            ${eduHtml}
+          </div>
+        `);
+        break;
+
+      case 'resume':
+        appendLine(`
+          <div class="p-3 rounded-lg bg-emerald-950/30 border border-emerald-500/30 text-xs space-y-2 my-2">
+            <div class="text-emerald-300 font-bold">📄 Triggering Resume Download...</div>
+            <div class="text-slate-300">File: Ritik_s_Resume.pdf</div>
+            <a href="${portfolioData.personal.resumeUrl}" download="Ritik_Parihar_Resume.pdf" class="inline-block px-3 py-1 rounded bg-emerald-500 text-slate-950 font-bold text-xs hover:bg-emerald-400">
+              Click Here If Download Does Not Start
+            </a>
+          </div>
+        `);
+        const a = document.createElement('a');
+        a.href = portfolioData.personal.resumeUrl;
+        a.download = 'Ritik_Parihar_Resume.pdf';
+        a.click();
+        break;
+
+      case 'contact':
+        appendLine(`
+          <div class="p-3 rounded-lg bg-slate-900 border border-white/10 space-y-1.5 my-2 text-xs">
+            <div class="text-cyan-400 font-bold text-xs uppercase">Direct Contacts:</div>
+            <div>📧 Email: <a href="mailto:${portfolioData.personal.email}" class="text-white underline">${portfolioData.personal.email}</a></div>
+            <div>📱 Phone: <a href="tel:${portfolioData.personal.phone}" class="text-white underline">${portfolioData.personal.phone}</a></div>
+            <div>💬 WhatsApp: <a href="${portfolioData.personal.whatsapp}" target="_blank" class="text-emerald-400 underline">Chat on WhatsApp</a></div>
+            <div>🔗 GitHub: <a href="${portfolioData.personal.github}" target="_blank" class="text-slate-300 underline">${portfolioData.personal.github}</a></div>
+            <div>💼 LinkedIn: <a href="${portfolioData.personal.linkedin}" target="_blank" class="text-sky-400 underline">${portfolioData.personal.linkedin}</a></div>
+          </div>
+        `);
+        break;
+
+      case 'neovim':
+        appendLine(`
+          <div class="space-y-2 pl-4 border-l-2 border-emerald-500/40 my-2 text-xs text-slate-300">
+            <div class="text-emerald-400 font-bold">Why Neovim &amp; tmux?</div>
+            <p>1. <strong class="text-white">Zero Latency:</strong> Immediate keystroke feedback without the overhead of heavy Electron IDEs.</p>
+            <p>2. <strong class="text-white">Modular Lua Config:</strong> Custom LSP mappings with typescript-tools, telescope, and nvim-cmp configured for deep monorepo navigation.</p>
+            <p>3. <strong class="text-white">Modal Editing:</strong> Effortless refactoring with motions and macros, keeping both hands strictly anchored to the home row.</p>
+          </div>
+        `);
+        break;
+
+      case 'clear':
+        if (screen) {
+          screen.innerHTML = `
+            <div class="text-slate-500 text-xs">
+              Terminal buffer cleared. Type <span class="text-cyan-400 font-semibold">'help'</span> for instructions.
+            </div>
+          `;
+        }
+        return;
+
+      default:
+        appendLine(`
+          <div class="text-rose-400 text-xs my-1">
+            zsh: command not found: <span class="font-bold">${cmdRaw}</span>. Type <span class="text-cyan-400 underline font-semibold cursor-pointer" onclick="document.getElementById('terminal-input').value='help'">help</span> to see available commands.
+          </div>
+        `);
+    }
+  }
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!input) return;
+    const value = input.value;
+    input.value = '';
+    handleCommand(value);
+  });
+
+  clearBtn?.addEventListener('click', () => {
+    handleCommand('clear');
+  });
+
+  quickBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const cmd = btn.getAttribute('data-run-cmd');
+      if (cmd) {
+        handleCommand(cmd);
+      }
+    });
+  });
+</script>

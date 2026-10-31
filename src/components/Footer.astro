@@ -1,0 +1,80 @@
+---
+import { ArrowUp, Heart, Terminal, Github, Linkedin, Mail } from 'lucide-astro';
+import { portfolioData } from '../data/portfolioData';
+---
+
+<footer class="border-t border-white/5 bg-[#060910] relative z-10 py-12">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+      
+      <!-- Left: Logo & Identity -->
+      <div class="space-y-1 text-center md:text-left">
+        <div class="flex items-center justify-center md:justify-start gap-2 font-mono text-sm font-bold text-white">
+          <span class="text-cyan-400">&gt;_</span>
+          <span>ritik.parihar()</span>
+        </div>
+        <p class="text-xs text-slate-500">
+          Full-Stack &amp; Cross-Platform Application Developer • Jodhpur, India
+        </p>
+      </div>
+
+      <!-- Center: Built with Astro & Bun -->
+      <div class="flex items-center gap-2 text-xs font-mono text-slate-400">
+        <span>Engineered with</span>
+        <a href="https://astro.build" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:underline font-semibold">Astro</a>
+        <span>&amp;</span>
+        <a href="https://bun.sh" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline font-semibold">Bun</a>
+        <span>+ Tailwind CSS</span>
+      </div>
+
+      <!-- Right: Socials & Back to Top -->
+      <div class="flex items-center gap-4">
+        <a
+          href={portfolioData.personal.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub"
+          class="p-2 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
+        >
+          <Github class="w-4 h-4" />
+        </a>
+        <a
+          href={portfolioData.personal.linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="LinkedIn"
+          class="p-2 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
+        >
+          <Linkedin class="w-4 h-4" />
+        </a>
+        <a
+          href={`mailto:${portfolioData.personal.email}`}
+          aria-label="Email"
+          class="p-2 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
+        >
+          <Mail class="w-4 h-4" />
+        </a>
+
+        <button
+          type="button"
+          onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+          aria-label="Back to top"
+          class="p-2 rounded-lg bg-white/5 hover:bg-cyan-500/10 hover:text-cyan-400 text-slate-400 transition-colors ml-2 cursor-pointer"
+        >
+          <ArrowUp class="w-4 h-4" />
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Bottom Copyright Note -->
+    <div class="mt-8 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between text-[11px] font-mono text-slate-600 gap-2">
+      <div>
+        &copy; {new Date().getFullYear()} Ritik Parihar. All rights reserved.
+      </div>
+      <div>
+        End-to-End Type Safety • Monorepos • Neovim
+      </div>
+    </div>
+  </div>
+</footer>

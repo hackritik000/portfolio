@@ -1,0 +1,136 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const {
+  title = "Ritik Parihar | Full-Stack & Cross-Platform Developer",
+  description = "Portfolio of Ritik Parihar - Full-Stack and Cross-Platform Developer with 3+ years experience building production-grade web & mobile applications with TypeScript, React Native, Next.js, Astro, Docker, and tRPC.",
+  ogImage = "/og-image.png"
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://ritikparihar.dev');
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Ritik Parihar",
+  "jobTitle": "Full-Stack and Cross-Platform Application Developer",
+  "url": "https://ritikparihar.dev",
+  "sameAs": [
+    "https://github.com/hackritik000",
+    "https://linkedin.com/in/ritik-parihar"
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Jodhpur",
+    "addressRegion": "Rajasthan",
+    "addressCountry": "India"
+  },
+  "knowsAbout": [
+    "TypeScript",
+    "React Native",
+    "Next.js",
+    "Astro",
+    "Expo",
+    "Express.js",
+    "Docker",
+    "tRPC",
+    "PostgreSQL",
+    "Prisma",
+    "Drizzle ORM",
+    "Neovim"
+  ]
+};
+---
+
+<!doctype html>
+<html lang="en" class="dark scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230284c7'/><text x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' font-family='monospace' font-weight='bold' font-size='50' fill='white'>RP</text></svg>" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="author" content="Ritik Parihar" />
+    <meta name="keywords" content="Ritik Parihar, Full-Stack Developer, React Native, Next.js, Astro, Expo, TypeScript, Express, tRPC, Software Engineer, Portfolio, Jodhpur, India" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={ogImage} />
+
+    <!-- Google Fonts: Inter and JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+
+  <body class="bg-[#080c14] text-slate-100 min-h-screen selection:bg-cyan-500/30 selection:text-cyan-200 antialiased font-['Inter',sans-serif]">
+    <!-- Background glowing ambient lights -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+      <div class="absolute -top-40 -left-40 w-96 h-96 bg-cyan-600/15 rounded-full blur-[128px]"></div>
+      <div class="absolute top-1/3 -right-40 w-96 h-96 bg-emerald-600/15 rounded-full blur-[128px]"></div>
+      <div class="absolute -bottom-40 left-1/3 w-96 h-96 bg-indigo-600/15 rounded-full blur-[128px]"></div>
+      <div class="absolute inset-0 bg-grid-pattern opacity-40"></div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-3 px-4 py-3 rounded-xl bg-slate-900/90 border border-cyan-500/30 text-white shadow-2xl backdrop-blur-md text-sm font-medium">
+      <div class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></div>
+      <span id="toast-message">Notification message</span>
+    </div>
+
+    <div class="relative z-10 flex flex-col min-h-screen">
+      <slot />
+    </div>
+
+    <!-- Client-side helper scripts -->
+    <script>
+      // Global toast helper
+      (window as any).showToast = function (message: string) {
+        const toast = document.getElementById('toast');
+        const toastMsg = document.getElementById('toast-message');
+        if (!toast || !toastMsg) return;
+
+        toastMsg.textContent = message;
+        toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+        toast.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto');
+
+        setTimeout(() => {
+          toast.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto');
+          toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+        }, 3200);
+      };
+
+      // Copy text helper
+      (window as any).copyToClipboard = function (text: string, label: string) {
+        navigator.clipboard.writeText(text).then(() => {
+          (window as any).showToast(`Copied ${label} to clipboard!`);
+        }).catch(() => {
+          (window as any).showToast(`Failed to copy to clipboard`);
+        });
+      };
+    </script>
+  </body>
+</html>

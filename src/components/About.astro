@@ -1,0 +1,139 @@
+---
+import { Shield, Sparkles, Users, Zap, Check, MapPin, Calendar, Award } from 'lucide-astro';
+import { portfolioData } from '../data/portfolioData';
+
+const principles = [
+  {
+    icon: Shield,
+    title: 'End-to-End Type Safety',
+    description: 'Eliminating entire classes of runtime bugs by enforcing end-to-end type safety with TypeScript, tRPC, Drizzle ORM, and Prisma across frontend and backend boundaries.'
+  },
+  {
+    icon: Zap,
+    title: 'Cross-Platform Velocity',
+    description: 'Building cohesive experiences across iOS, Android, and Web using React Native, Expo, and Next.js within Docker-based monorepos that share types and business logic.'
+  },
+  {
+    icon: Users,
+    title: 'Empathetic Team Leadership',
+    description: 'Directed engineering squads up to 7 members across healthcare and SaaS, instituting agile code reviews, mentoring junior engineers, and increasing sprint velocity by 15%.'
+  },
+  {
+    icon: Award,
+    title: 'Ruthless Performance & UX',
+    description: 'Engineered web platforms achieving 95+ Google PageSpeed scores, keyboard-first ERP tools for high-speed mandi operations, and short-form video shopping feeds.'
+  }
+];
+---
+
+<section id="about" class="py-20 relative">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Section Heading -->
+    <div class="space-y-3 mb-16">
+      <div class="inline-flex items-center gap-2 font-mono text-xs font-semibold text-cyan-400 uppercase tracking-widest">
+        <span>// 01. About Me</span>
+      </div>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+        Engineering clean code, <span class="gradient-text">scalable architectures</span>, and resilient teams.
+      </h2>
+    </div>
+
+    <!-- Main Grid: Narrative & Quick Facts -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-16">
+      
+      <!-- Bio Narrative -->
+      <div class="lg:col-span-7 space-y-5 text-slate-300 leading-relaxed text-base sm:text-lg">
+        <p>
+          I'm <span class="text-white font-semibold">Ritik Parihar</span>, a Full-Stack and Cross-Platform Application Developer based in Jodhpur, Rajasthan. With over 3 years of hands-on software development, I specialize in bridging the gap between elegant mobile experiences and bulletproof server architectures.
+        </p>
+        <p>
+          My technical journey spans founding roles in engineering teams, from rewriting legacy monolithic systems into modular, type-safe applications at <strong class="text-white font-medium">RBM Pvt. Ltd.</strong>, to leading a 7-person team delivering mission-critical healthcare portals at <strong class="text-white font-medium">LivingNeeds Health Care</strong>.
+        </p>
+        <p>
+          Whether building low-latency business discovery platforms (<em class="text-cyan-400 not-italic">JustSearch</em>), video-commerce feeds (<em class="text-cyan-400 not-italic">Dukandar</em>), or lightning-fast keyboard-first ERPs for wholesale markets, my goal is consistent: <strong class="text-white font-medium">fast software that scales effortlessly and is a joy for engineers to maintain</strong>.
+        </p>
+
+        <!-- Bullet Highlights -->
+        <div class="pt-4 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm font-medium text-slate-300">
+          <div class="flex items-center gap-2.5">
+            <span class="w-5 h-5 rounded-full bg-cyan-500/10 text-cyan-400 flex items-center justify-center shrink-0">✓</span>
+            <span>Based in Jodhpur, Rajasthan, India</span>
+          </div>
+          <div class="flex items-center gap-2.5">
+            <span class="w-5 h-5 rounded-full bg-cyan-500/10 text-cyan-400 flex items-center justify-center shrink-0">✓</span>
+            <span>3+ Years Production Experience</span>
+          </div>
+          <div class="flex items-center gap-2.5">
+            <span class="w-5 h-5 rounded-full bg-cyan-500/10 text-cyan-400 flex items-center justify-center shrink-0">✓</span>
+            <span>Cross-Platform Web &amp; Mobile</span>
+          </div>
+          <div class="flex items-center gap-2.5">
+            <span class="w-5 h-5 rounded-full bg-cyan-500/10 text-cyan-400 flex items-center justify-center shrink-0">✓</span>
+            <span>Neovim &amp; tmux Power User</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Profile Card -->
+      <div class="lg:col-span-5">
+        <div class="glass-panel rounded-2xl p-6 border border-white/10 space-y-6">
+          <h3 class="text-sm font-mono uppercase tracking-wider text-slate-400 font-semibold border-b border-white/5 pb-3">
+            Developer Snapshot
+          </h3>
+
+          <div class="space-y-4 text-sm">
+            <div class="flex items-center justify-between py-1 border-b border-white/5">
+              <span class="text-slate-400">Current Role</span>
+              <span class="text-white font-semibold">Team Lead &amp; Sr. Developer</span>
+            </div>
+            <div class="flex items-center justify-between py-1 border-b border-white/5">
+              <span class="text-slate-400">Company</span>
+              <span class="text-cyan-400 font-medium">RBM Pvt. Ltd.</span>
+            </div>
+            <div class="flex items-center justify-between py-1 border-b border-white/5">
+              <span class="text-slate-400">Primary Languages</span>
+              <span class="text-white">TypeScript, JavaScript, SQL, PHP</span>
+            </div>
+            <div class="flex items-center justify-between py-1 border-b border-white/5">
+              <span class="text-slate-400">Core Stacks</span>
+              <span class="text-white">Next.js, React Native, Expo, Astro</span>
+            </div>
+            <div class="flex items-center justify-between py-1 border-b border-white/5">
+              <span class="text-slate-400">Architecture</span>
+              <span class="text-emerald-400 font-medium">Docker Monorepo, tRPC, Drizzle</span>
+            </div>
+            <div class="flex items-center justify-between py-1">
+              <span class="text-slate-400">Education</span>
+              <span class="text-white text-right">B.Tech (CSE) • Lachoo Memorial</span>
+            </div>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-cyan-950/40 border border-cyan-500/20 text-xs text-cyan-300 leading-relaxed font-mono">
+            &gt; "Clean code is not an accident; it is the deliberate application of strict types, clear boundaries, and team discipline."
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Core Engineering Principles Grid -->
+    <div class="space-y-6">
+      <h3 class="text-xl font-bold text-white tracking-tight">Core Engineering Philosophy</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {principles.map((item) => (
+          <div class="glass-panel glass-panel-hover rounded-2xl p-6 border border-white/5 flex gap-4">
+            <div class="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 flex items-center justify-center shrink-0">
+              <item.icon class="w-6 h-6" />
+            </div>
+            <div class="space-y-2">
+              <h4 class="text-lg font-semibold text-white">{item.title}</h4>
+              <p class="text-sm text-slate-300 leading-relaxed">{item.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+  </div>
+</section>

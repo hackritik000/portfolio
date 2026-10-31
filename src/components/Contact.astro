@@ -1,0 +1,227 @@
+---
+import { Mail, Phone, MessageSquare, MapPin, Send, Github, Linkedin, Copy, Check, Clock } from 'lucide-astro';
+import { portfolioData } from '../data/portfolioData';
+---
+
+<section id="contact" class="py-20 relative">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Section Header -->
+    <div class="space-y-3 mb-16">
+      <div class="inline-flex items-center gap-2 font-mono text-xs font-semibold text-cyan-400 uppercase tracking-widest">
+        <span>// 07. Get In Touch</span>
+      </div>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+        Let's build something <span class="gradient-text">extraordinary</span> together.
+      </h2>
+      <p class="text-slate-400 max-w-xl text-sm sm:text-base">
+        Whether you have an engineering lead role, a high-stakes cross-platform project, or want to discuss type-safe systems, my inbox is always open.
+      </p>
+    </div>
+
+    <!-- Contact Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+      
+      <!-- Left Column: Contact Cards & Quick Triggers -->
+      <div class="lg:col-span-5 space-y-4">
+        
+        <!-- Email Card -->
+        <div class="glass-panel glass-panel-hover rounded-2xl p-5 border border-white/5 flex items-center justify-between gap-4">
+          <div class="flex items-center gap-3.5">
+            <div class="w-11 h-11 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 flex items-center justify-center shrink-0">
+              <Mail class="w-5 h-5" />
+            </div>
+            <div>
+              <div class="text-xs font-mono text-slate-400">Direct Email</div>
+              <a href={`mailto:${portfolioData.personal.email}`} class="text-sm font-semibold text-white hover:text-cyan-400 transition-colors">
+                {portfolioData.personal.email}
+              </a>
+            </div>
+          </div>
+          <button
+            type="button"
+            onclick={`window.copyToClipboard('${portfolioData.personal.email}', 'Email')`}
+            title="Copy Email"
+            class="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white transition-colors cursor-pointer"
+          >
+            <Copy class="w-4 h-4" />
+          </button>
+        </div>
+
+        <!-- Phone & WhatsApp Card -->
+        <div class="glass-panel glass-panel-hover rounded-2xl p-5 border border-white/5 flex items-center justify-between gap-4">
+          <div class="flex items-center gap-3.5">
+            <div class="w-11 h-11 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center shrink-0">
+              <Phone class="w-5 h-5" />
+            </div>
+            <div>
+              <div class="text-xs font-mono text-slate-400">Phone &amp; WhatsApp</div>
+              <a href={`tel:${portfolioData.personal.phone}`} class="text-sm font-semibold text-white hover:text-emerald-400 transition-colors">
+                {portfolioData.personal.phone}
+              </a>
+            </div>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <a
+              href={portfolioData.personal.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="px-2.5 py-1 text-xs font-medium rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 hover:bg-emerald-500/20 transition-colors"
+            >
+              WhatsApp
+            </a>
+            <button
+              type="button"
+              onclick={`window.copyToClipboard('${portfolioData.personal.phone}', 'Phone')`}
+              title="Copy Phone"
+              class="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white transition-colors cursor-pointer"
+            >
+              <Copy class="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+
+        <!-- Location & Timezone Card -->
+        <div class="glass-panel rounded-2xl p-5 border border-white/5 space-y-3">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-11 h-11 rounded-xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 flex items-center justify-center shrink-0">
+                <MapPin class="w-5 h-5" />
+              </div>
+              <div>
+                <div class="text-xs font-mono text-slate-400">Location</div>
+                <div class="text-sm font-semibold text-white">
+                  {portfolioData.personal.location}
+                </div>
+              </div>
+            </div>
+
+            <!-- Indian Standard Time Indicator -->
+            <div class="flex items-center gap-1.5 text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+              <span>IST (UTC+5:30)</span>
+            </div>
+          </div>
+
+          <p class="text-xs text-slate-400 leading-relaxed pt-1">
+            Open to remote engagements worldwide as well as hybrid/on-site leadership roles.
+          </p>
+        </div>
+
+        <!-- Social Channels -->
+        <div class="grid grid-cols-2 gap-3 pt-2">
+          <a
+            href={portfolioData.personal.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center justify-center gap-2 p-3.5 rounded-xl glass-panel glass-panel-hover text-slate-200 hover:text-white text-xs font-semibold"
+          >
+            <Github class="w-4 h-4" />
+            <span>GitHub Profile</span>
+          </a>
+          <a
+            href={portfolioData.personal.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center justify-center gap-2 p-3.5 rounded-xl glass-panel glass-panel-hover text-slate-200 hover:text-sky-400 text-xs font-semibold"
+          >
+            <Linkedin class="w-4 h-4 text-sky-400" />
+            <span>LinkedIn Profile</span>
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Interactive Direct Message Form -->
+      <div class="lg:col-span-7">
+        <div class="glass-panel rounded-2xl p-7 border border-white/10 space-y-5">
+          <h3 class="text-lg font-bold text-white tracking-tight flex items-center gap-2">
+            <MessageSquare class="w-5 h-5 text-cyan-400" />
+            <span>Send a Direct Message</span>
+          </h3>
+
+          <form id="contact-form" class="space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="space-y-1.5">
+                <label for="name" class="block text-xs font-mono text-slate-400">Your Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  required
+                  placeholder="e.g. Alex Smith"
+                  class="w-full px-4 py-2.5 rounded-xl bg-slate-900/90 border border-white/10 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50 transition-all"
+                />
+              </div>
+
+              <div class="space-y-1.5">
+                <label for="email" class="block text-xs font-mono text-slate-400">Your Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  required
+                  placeholder="alex@company.com"
+                  class="w-full px-4 py-2.5 rounded-xl bg-slate-900/90 border border-white/10 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50 transition-all"
+                />
+              </div>
+            </div>
+
+            <div class="space-y-1.5">
+              <label for="subject" class="block text-xs font-mono text-slate-400">Subject / Inquiry</label>
+              <input
+                type="text"
+                id="subject"
+                required
+                placeholder="Opportunity: Senior Full-Stack Engineer / Lead Developer"
+                class="w-full px-4 py-2.5 rounded-xl bg-slate-900/90 border border-white/10 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50 transition-all"
+              />
+            </div>
+
+            <div class="space-y-1.5">
+              <label for="message" class="block text-xs font-mono text-slate-400">Your Message</label>
+              <textarea
+                id="message"
+                rows="4"
+                required
+                placeholder="Hi Ritik, I reviewed your experience with type-safe architectures and React Native..."
+                class="w-full px-4 py-2.5 rounded-xl bg-slate-900/90 border border-white/10 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50 transition-all resize-none"
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-sm transition-all shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:-translate-y-0.5 cursor-pointer"
+            >
+              <span>Dispatch Message</span>
+              <Send class="w-4 h-4" />
+            </button>
+          </form>
+
+          <p class="text-[11px] font-mono text-slate-500 pt-1">
+            * This form automatically prepares and opens an email draft to {portfolioData.personal.email}.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<script>
+  import { portfolioData } from '../data/portfolioData';
+
+  const contactForm = document.getElementById('contact-form');
+  contactForm?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = (document.getElementById('name') as HTMLInputElement)?.value || '';
+    const email = (document.getElementById('email') as HTMLInputElement)?.value || '';
+    const subject = (document.getElementById('subject') as HTMLInputElement)?.value || 'Inquiry from Portfolio';
+    const message = (document.getElementById('message') as HTMLTextAreaElement)?.value || '';
+
+    const body = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
+    const mailtoUrl = `mailto:${portfolioData.personal.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    (window as any).showToast('Opening your email client...');
+    window.location.href = mailtoUrl;
+  });
+</script>
